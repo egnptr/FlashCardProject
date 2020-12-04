@@ -21,10 +21,13 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mSelectedOption: Int = 0
     private var mCorrectAnswers: Int = 0
     var isBack: Boolean = true
+    private var mUserName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
+
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
 
         mQuestionList = Constants.getQuestions()
         setQuestion()
@@ -117,9 +120,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
                             flipView.flipTheView();
                         }
                         else -> {
-                            Toast.makeText(this,
-                                "You have completed the quiz.",
-                                Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this,ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Constants.TOTAL_QUESTION, mQuestionList!!.size)
+                            startActivity(intent)
                         }
                     }
 

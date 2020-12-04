@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:layout_marginStart="15dp"
             android:indeterminate="false"
-            android:max="10"
+            android:max="20"
             android:minHeight="50dp"
             android:progress="0" />
 
